@@ -45,6 +45,9 @@ public class Fecha {
 		resu = diasTranscurridos(FECHA1, FECHA2);
 		System.out.println(resu);
 		
-	}*/
+	}
+	
+	*Otra prueba en los comentarios
+	*/
 
 }
