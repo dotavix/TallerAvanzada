@@ -14,7 +14,7 @@ class WeatherTest {
 	
 	@Test
 	void merlo() {
-		System.out.println(Weather.temperatura("moron,AR"));
+		System.out.println(Weather.temperatura("merlo,AR"));
 		Assert.assertTrue(true);
 	}
 

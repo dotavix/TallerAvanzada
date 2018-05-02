@@ -6,21 +6,26 @@ import org.junit.Test;
 public class AsistenteTest {
 	
 	@Test
-	public void devuelveElAgradecimiento() {
+	public void pruebas() {
 		
 		String[] mensajes = {
-				"¡Muchas gracias!!",
-				"te agradezco mucho por lo que hiciste!",
+				"hola!",
+				"hola padre, como andas",
+				"gracias, te agradezco mucho por lo que hiciste!",
 				"GRAciaS!",
-				"Simplemente gracias por todo lo que haces cada dia.",
-				"En fin. Muchisimas Gracias por todo."
+				"los chause",
+				"wea cosmica",
+				"quiero saber el clima en merlo",
+				"quiero saber el clima en san justo"
 		};
 
-		Asistente xerox = new Asistente();
+		String user = "Jorge";
+		
+		Asistente xerox = new Asistente("robotitus");
 		
 		for(String mensaje : mensajes) {
-			
-			Assert.assertEquals("De nada!", xerox.devolverAgradecimiento(mensaje));
+			System.out.println(xerox.enviar(user,mensaje));
+			Assert.assertTrue(true);
 		}
 		
 	}
