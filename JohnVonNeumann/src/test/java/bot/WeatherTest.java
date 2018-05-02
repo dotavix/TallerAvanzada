@@ -7,9 +7,15 @@ import org.junit.jupiter.api.Test;
 class WeatherTest {
 
 	@Test
-	void test() {
+	void necochea() {
 		System.out.println(Weather.temperatura("necochea"));
-		Assert.assertTrue(true);	
+		Assert.assertTrue(true);
+	}
+	
+	@Test
+	void merlo() {
+		System.out.println(Weather.temperatura("moron,AR"));
+		Assert.assertTrue(true);
 	}
 
 }
