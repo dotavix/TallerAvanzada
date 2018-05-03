@@ -13,12 +13,30 @@ public class Fecha {
 		this.fecha = fecha;
 	}
 
-	public static Date sumarDiasAFecha(Date fecha, int dias) {
-		if (dias == 0)
-			return fecha;
+	
+	public static Date sumarFecha(Date fecha, int cantidad, String dato) {
+		
 		Calendar calendar = new GregorianCalendar();
+		
+		if (cantidad == 0)
+			return fecha;
+		
+		else if (dato.contains("días") || dato.contains("día") ||dato.contains("dias") ||dato.contains("dia")) {
+		
 		calendar.setTime(fecha);
-		calendar.add(Calendar.DAY_OF_YEAR, dias); // MONTH - YEAR aca hay que definir si vamos a hacer la misma funcion 3 veces para dia mes o a�o, o tener 1 solo para todos los casos, PD: si le pasas numeros negativos te hace la resta asi que va bien
+		calendar.add(Calendar.DAY_OF_YEAR, cantidad);
+		}
+		else if(dato.contains("meses")||dato.contains("mes") || dato.contains("Meses") || dato.contains("Mes")) {
+			calendar.setTime(fecha);
+			calendar.add(Calendar.MONTH, cantidad);
+		}
+		
+		else if(dato.contains("años") || dato.contains("año") || dato.contains("Años") ||dato.contains("Año")) {
+			
+			calendar.setTime(fecha);
+			calendar.add(Calendar.YEAR, cantidad);
+		}
+		
 		return calendar.getTime();
 	}
 
@@ -48,15 +66,15 @@ public class Fecha {
 		String[] part = fechaHoy().split("-");
 		return "Hoy es el"+part[0]+" de "+part[1]+" del "+part[2]+"";
 	}
-	
 	public static void main(String[] args) {
 
 		/*Date FECHA1 = new GregorianCalendar(2018, 3,30,15,15,0).getTime();
 		Date FECHA2 = new GregorianCalendar(2018, 5, 23, 15, 15, 0).getTime();
 		Date FECHA_MAS = new GregorianCalendar().getTime();
 		int resu = 0;
-		int dias = 3;
-		FECHA_MAS = sumarDiasAFecha(FECHA_MAS, dias)
+		int dias = -3;
+		String dato="qué día fue hace 3 días?";
+		FECHA_MAS = sumarFecha(FECHA_MAS, dias,dato);
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("EEEE-dd-MMMM-yyyy");
 		
@@ -74,8 +92,4 @@ public class Fecha {
 		
 	
 	}
-	
-	
-	
-
 }
