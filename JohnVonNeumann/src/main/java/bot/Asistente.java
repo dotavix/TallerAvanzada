@@ -15,17 +15,17 @@ public class Asistente {
 		entrada.replace("por favor", "");
 		
 		try {
-			if(entrada.matches("(?s).*\\bhola\\b.*")) {
+			if(entrada.matches(".*hola.*")) {
 				return new EcoResponse().devolverSaludo(user,nombreAsistente);
 			}
-			if(entrada.matches("(?s).*\\bgracias\\b.*")) {
+			if(entrada.matches(".*gracias.*")) {
 				return new EcoResponse().devolverAgradecimiento(user);
 			}
-			if(entrada.contains("chau")) {
+			if(entrada.matches(".*chau.*")) {
 				return new EcoResponse().devolverDespedida(user);
 			}
-			if(entrada.matches("(?s).*\\bclima en\\b.*")) {
-				return Weather.temperatura(entrada.split("clima en ")[1]);
+			if(entrada.matches(".*clima en.*")) {
+				return Weather.temperatura(entrada.split("clima en ")[1].split(",")[0]);
 			}
 		}
 		catch (Exception e) {
