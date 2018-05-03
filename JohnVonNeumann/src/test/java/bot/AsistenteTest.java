@@ -1,9 +1,18 @@
 package bot;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 public class AsistenteTest {
+	
+	public final static String USER = "Jorge";
+	Asistente robot;
+	
+	@Before
+	public void setup() {
+		robot = new Asistente("robotitus");
+	}
 	
 	@Test
 	public void pruebas() {
@@ -16,15 +25,16 @@ public class AsistenteTest {
 				"los chause",
 				"wea cosmica",
 				"quiero saber el clima en merlo",
-				"quiero saber el clima en san justo"
+				"quiero saber el clima en san justo",
+				"que hora es?",
+				"que dia es?",
+				"quisiera saber la fecha actual",
+				"que dia de la semana es?"
 		};
 
-		String user = "Jorge";
-		
-		Asistente xerox = new Asistente("robotitus");
-		
+			
 		for(String mensaje : mensajes) {
-			System.out.println(xerox.enviar(user,mensaje));
+			System.out.println(robot.enviar(USER,mensaje));
 			Assert.assertTrue(true);
 		}
 		
