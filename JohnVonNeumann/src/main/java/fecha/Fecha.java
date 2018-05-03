@@ -33,33 +33,21 @@ public class Fecha {
 		return new SimpleDateFormat(" dd-MMMM-yyyy-hh:mma-EEEE ").format(Calendar.getInstance().getTime());
 		
 	}
-	
-	
-	
 
 	public static String hora() {
-		String[] part = fechaHoy().split("-");	
-		return part[3];
-	
+		String[] part = fechaHoy().split("-");
+		return "Son las "+part[3];
 	}
 	
 	public static String diaDeLaSemana() {
 		String[] part = fechaHoy().split("-");
-		return part[4];
-		
+		return "Hoy es "+part[4];
 	}
-	
 	
 	public static String fechaActual() {
 		String[] part = fechaHoy().split("-");
-		return ""+part[0]+" de "+part[1]+" del "+part[2]+"";
-		
+		return "Hoy es el"+part[0]+" de "+part[1]+" del "+part[2]+"";
 	}
-	
-	
-	
-	
-	
 	
 	public static void main(String[] args) {
 
@@ -80,9 +68,10 @@ public class Fecha {
 		
 		//System.out.println(Fecha.fechaDeHoy());
 		
-		String h = Fecha.fechaActual();
+		System.out.println(Fecha.hora());
+		System.out.println(Fecha.fechaActual());
+		System.out.println(Fecha.diaDeLaSemana());
 		
-		System.out.println(h);
 	
 	}
 	
