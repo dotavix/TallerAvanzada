@@ -28,26 +28,65 @@ public class Fecha {
 		return dias;
 	}
 	
+	public static String fechaHoy() {
+		
+		return new SimpleDateFormat(" dd-MMMM-yyyy-hh:mma-EEEE ").format(Calendar.getInstance().getTime());
+		
+	}
 	
-	/*public static void main(String[] args) {
+	
+	
 
-		Date FECHA1 = new GregorianCalendar(2018, 3,30,15,15,0).getTime();
+	public static String hora() {
+		String[] part = fechaHoy().split("-");	
+		return part[3];
+	
+	}
+	
+	public static String diaDeLaSemana() {
+		String[] part = fechaHoy().split("-");
+		return part[4];
+		
+	}
+	
+	
+	public static String fechaActual() {
+		String[] part = fechaHoy().split("-");
+		return ""+part[0]+" de "+part[1]+" del "+part[2]+"";
+		
+	}
+	
+	
+	
+	
+	
+	
+	public static void main(String[] args) {
+
+		/*Date FECHA1 = new GregorianCalendar(2018, 3,30,15,15,0).getTime();
 		Date FECHA2 = new GregorianCalendar(2018, 5, 23, 15, 15, 0).getTime();
 		Date FECHA_MAS = new GregorianCalendar().getTime();
 		int resu = 0;
 		int dias = 3;
-		FECHA_MAS = sumarDiasAFecha(FECHA_MAS, dias);
+		FECHA_MAS = sumarDiasAFecha(FECHA_MAS, dias)
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("EEEE-dd-MMMM-yyyy");
 		
 		System.out.println(sdf.format(FECHA_MAS));
 	
 		resu = diasTranscurridos(FECHA1, FECHA2);
-		System.out.println(resu);
+		System.out.println(resu);*/
 		
+		
+		//System.out.println(Fecha.fechaDeHoy());
+		
+		String h = Fecha.fechaActual();
+		
+		System.out.println(h);
+	
 	}
 	
-	*Otra prueba en los comentarios
-	*/
+	
+	
 
 }
