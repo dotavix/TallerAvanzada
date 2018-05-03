@@ -18,13 +18,14 @@ public class Weather {
 	        : OpenWeatherMap.Units.IMPERIAL;
 	    OpenWeatherMap owm = new OpenWeatherMap(units, owmApiKey);
 	    try {
-	      CurrentWeather weather = owm.currentWeatherByCityName(weatherCity);
-	      JSONObject clima = new JSONObject(weather.getRawResponse());
-	      //System.out.println("La temperatura para " + weather.getCityName() + " es de " + clima.getJSONObject("main").getDouble("temp") + "°C");
-	      ret = "La temperatura para " + weather.getCityName() + " es de " + clima.getJSONObject("main").getDouble("temp") + "°C";
+	    	CurrentWeather weather = owm.currentWeatherByCityName(weatherCity);
+	      	JSONObject clima = new JSONObject(weather.getRawResponse());
+	      	//System.out.println("La temperatura para " + weather.getCityName() + " es de " + clima.getJSONObject("main").getDouble("temp") + "°C");
+	      	ret = "La temperatura para " + weather.getCityName() + " es de " + clima.getJSONObject("main").getDouble("temp") + "°C";
 	    }
-	    catch (IOException | JSONException e) {
-	      e.printStackTrace();
+	    catch (Exception e) {
+	    	//e.printStackTrace();
+	    	return "Ciudad no valida.";
 	    }
 	    return ret;
 	  }
