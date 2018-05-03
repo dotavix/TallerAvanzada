@@ -28,8 +28,11 @@ public class AsistenteTest {
 				"quiero saber el clima en san justo",
 				"que hora es?",
 				"que dia es?",
+				"qué día es?",
 				"quisiera saber la fecha actual",
-				"que dia de la semana es?"
+				"que dia de la semana es?",
+				"que día será en 4 dias?",
+				"que dia sera en 27 años"
 		};
 
 			

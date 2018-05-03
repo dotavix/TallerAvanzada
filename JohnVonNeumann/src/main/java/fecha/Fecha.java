@@ -6,38 +6,28 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class Fecha {
-
-	private Date fecha;
-
-	public Fecha(Date fecha) {
-		this.fecha = fecha;
-	}
-
 	
-	public static Date sumarFecha(Date fecha, int cantidad, String dato) {
+	public static String sumarFecha(Date fecha, int cantidad, String dato) {
 		
 		Calendar calendar = new GregorianCalendar();
+		SimpleDateFormat retfrmt = new SimpleDateFormat("'Sera el' EEEE dd 'de' MMMM 'de' yyyy");
+		int dat = 0;
 		
 		if (cantidad == 0)
-			return fecha;
+			return retfrmt.format(fecha);
 		
-		else if (dato.contains("días") || dato.contains("día") ||dato.contains("dias") ||dato.contains("dia")) {
-		
+		if (dato.equals("dia"))
+			dat = Calendar.DAY_OF_YEAR;
+		else if (dato.equals("mes"))
+			dat = Calendar.MONTH;
+		else if (dato.equals("anio"))
+			dat = Calendar.YEAR;
+		else
+			return retfrmt.format(fecha);
 		calendar.setTime(fecha);
-		calendar.add(Calendar.DAY_OF_YEAR, cantidad);
-		}
-		else if(dato.contains("meses")||dato.contains("mes") || dato.contains("Meses") || dato.contains("Mes")) {
-			calendar.setTime(fecha);
-			calendar.add(Calendar.MONTH, cantidad);
-		}
+		calendar.add(dat, cantidad);
 		
-		else if(dato.contains("años") || dato.contains("año") || dato.contains("Años") ||dato.contains("Año")) {
-			
-			calendar.setTime(fecha);
-			calendar.add(Calendar.YEAR, cantidad);
-		}
-		
-		return calendar.getTime();
+		return retfrmt.format(calendar.getTime());
 	}
 
 	public static int diasTranscurridos(Date fechaInicial, Date fechaFinal) {

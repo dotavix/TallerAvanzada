@@ -1,5 +1,7 @@
 package bot;
 
+import java.util.Date;
+
 import fecha.Fecha;
 
 public class Asistente {
@@ -15,6 +17,13 @@ public class Asistente {
 		
 		entrada = entrada.toLowerCase();
 		entrada = entrada.replace("por favor", "");
+		entrada = entrada.replace("?", "");
+		entrada = entrada.replace("á", "a");
+		entrada = entrada.replace("é", "e");
+		entrada = entrada.replace("í", "i");
+		entrada = entrada.replace("ó", "o");
+		entrada = entrada.replace("ú", "u");
+		entrada = entrada.replace("ñ", "ni");
 		
 		try {
 			if(entrada.matches(".*hola.*")) {
@@ -37,6 +46,10 @@ public class Asistente {
 			}
 			if(entrada.matches(".*dia de la semana.*")) {
 				return Fecha.diaDeLaSemana();
+			}
+			if(entrada.matches(".*dia sera en.*")) {
+				String[] input = entrada.split("dia sera en ")[1].replace("s","").split(" ");
+				return Fecha.sumarFecha(new Date(), Integer.parseInt(input[0]), input[1]);
 			}
 		}
 		catch (Exception e) {
