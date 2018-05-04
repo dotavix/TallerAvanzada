@@ -28,7 +28,7 @@ public class Asistente {
 		entrada = entrada.replace("ñ", "ni");
 		
 		try {
-			if(entrada.matches(".*hola.*")) {
+			if(entrada.matches(".*(hola|(buen.*(dia|tarde|noche))).*")) {
 				return EcoResponse.devolverSaludo(user,nombreAsistente);
 			}
 			if(entrada.matches(".*gracias.*")) {
@@ -39,6 +39,9 @@ public class Asistente {
 			}
 			if(entrada.matches(".*clima en.*")) {
 				return Weather.temperatura(entrada.split("clima en ")[1].split(",")[0]);
+			}
+			if(entrada.matches(".*temperatura en.*")) {
+				return Weather.temperatura(entrada.split("temperatura en ")[1].split(",")[0]);
 			}
 			if(entrada.matches(".*hora es.*")) {
 				return Fecha.hora();
@@ -73,18 +76,20 @@ public class Asistente {
 			if(entrada.matches(".*dias pasaron desde el.*")) {
 				String input = entrada.split("dias pasaron desde el ")[1];
 				DateFormat format = new SimpleDateFormat("dd 'de' MMMM 'de' yyyy");
-				return Fecha.diasTranscurridos(new Date(), format.parse(input));
+				return "Pasaron "+Fecha.diasTranscurridos(new Date(), format.parse(input));
 			}
-//			falta este --->
-//			"@delucas faltan 9 días",
-//			jenkins.escuchar("@jenkins cuántos días faltan para el 10 de abril?")
+			if(entrada.matches(".*dias faltan para el.*")) {
+				String input = entrada.split("dias faltan para el ")[1];
+				DateFormat format = new SimpleDateFormat("dd 'de' MMMM 'de' yyyy");
+				return "Faltan "+Fecha.diasTranscurridos(format.parse(input),new Date());
+			}
 		}
 		catch (Exception e) {
 //			e.printStackTrace();
 			return "Error, error (robotina voice).";
 		}
 		
-		return "No entendí lo que me dijiste "+user+".";
+		return "No entendi lo que me dijiste "+user+", podrias repetirlo?";
 	}
 
 
