@@ -10,17 +10,21 @@ public class Fecha {
 	public static String sumarFecha(Date fecha, int cantidad, String dato) {
 		
 		Calendar calendar = new GregorianCalendar();
-		SimpleDateFormat retfrmt = new SimpleDateFormat("'Sera el' EEEE dd 'de' MMMM 'de' yyyy");
+		SimpleDateFormat retfrmt;
 		int dat = 0;
 		
 		if (cantidad == 0)
-			return retfrmt.format(fecha);
+			return "Es hoy.";
+		else if (cantidad > 0)
+			retfrmt = new SimpleDateFormat("'Sera el' EEEE dd 'de' MMMM 'de' yyyy");
+		else
+			retfrmt = new SimpleDateFormat("'Fue el' EEEE dd 'de' MMMM 'de' yyyy");
 		
 		if (dato.equals("dia"))
 			dat = Calendar.DAY_OF_YEAR;
 		else if (dato.equals("mes"))
 			dat = Calendar.MONTH;
-		else if (dato.equals("anio"))
+		else if (dato.equals("ani"))
 			dat = Calendar.YEAR;
 		else
 			return retfrmt.format(fecha);
@@ -30,10 +34,9 @@ public class Fecha {
 		return retfrmt.format(calendar.getTime());
 	}
 
-	public static int diasTranscurridos(Date fechaInicial, Date fechaFinal) {
-
-		int dias = (int) ((fechaFinal.getTime() - fechaInicial.getTime()) / 86400000);
-		return dias;
+	public static String diasTranscurridos(Date fechaInicial, Date fechaFinal) {
+		int dias = (int) (Math.abs((fechaFinal.getTime() - fechaInicial.getTime())) / 86400000);
+		return "Pasaron "+dias+" dias.";
 	}
 	
 	public static String fechaHoy() {

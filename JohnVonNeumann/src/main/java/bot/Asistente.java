@@ -1,5 +1,7 @@
 package bot;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import fecha.Fecha;
@@ -48,11 +50,37 @@ public class Asistente {
 				return Fecha.diaDeLaSemana();
 			}
 			if(entrada.matches(".*dia sera en.*")) {
-				String[] input = entrada.split("dia sera en ")[1].replace("s","").split(" ");
-				return Fecha.sumarFecha(new Date(), Integer.parseInt(input[0]), input[1]);
+				String[] input = entrada.split("dia sera en ")[1].split(" ");
+				return Fecha.sumarFecha(new Date(), Integer.parseInt(input[0]), input[1].substring(0, 3));
 			}
+			if(entrada.matches(".*dia sera dentro de.*")) {
+				String[] input = entrada.split("dia sera dentro de ")[1].split(" ");
+				return Fecha.sumarFecha(new Date(), Integer.parseInt(input[0]), input[1].substring(0, 3));
+			}
+			if(entrada.matches(".*dia (sera|va a ser) maniana.*")) {
+				return Fecha.sumarFecha(new Date(), 1, "dia");
+			}
+			if(entrada.matches(".*dia fue hace.*")) {
+				String[] input = entrada.split("dia fue hace ")[1].split(" ");
+				return Fecha.sumarFecha(new Date(), Integer.parseInt("-"+input[0]), input[1].substring(0, 3));
+			}
+			if(entrada.matches(".*dia fue ayer.*")) {
+				return Fecha.sumarFecha(new Date(), -1, "dia");
+			}
+			if(entrada.matches(".*dia fue (anteayer|antes de ayer).*")) {
+				return Fecha.sumarFecha(new Date(), -2, "dia");
+			}
+			if(entrada.matches(".*dias pasaron desde el.*")) {
+				String input = entrada.split("dias pasaron desde el ")[1];
+				DateFormat format = new SimpleDateFormat("dd 'de' MMMM 'de' yyyy");
+				return Fecha.diasTranscurridos(new Date(), format.parse(input));
+			}
+//			falta este --->
+//			"@delucas faltan 9 días",
+//			jenkins.escuchar("@jenkins cuántos días faltan para el 10 de abril?")
 		}
 		catch (Exception e) {
+//			e.printStackTrace();
 			return "Error, error (robotina voice).";
 		}
 		
