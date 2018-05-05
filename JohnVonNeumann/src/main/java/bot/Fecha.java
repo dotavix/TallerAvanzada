@@ -39,6 +39,16 @@ public class Fecha {
 		return dias>1 ? ""+dias+" dias." : ""+dias+" dia.";
 	}
 	
+	public static String mesesTranscurridos(Date fechaInicial, Date fechaFinal) {
+		int meses = (int) (Math.abs((fechaFinal.getTime() - fechaInicial.getTime())) / 86400000)/30;
+		return meses>1 ? ""+meses+" meses." : ""+meses+" mes.";
+	}
+	
+	public static String aniosTranscurridos(Date fechaInicial, Date fechaFinal) {
+		int anios = (int) (Math.abs((fechaFinal.getTime() - fechaInicial.getTime())) / 86400000)/365;
+		return anios>1 ? ""+anios+" años." : ""+anios+" año.";
+	}
+	
 	public static String fechaHoy() {
 		return new SimpleDateFormat(" dd-MMMM-yyyy-hh:mma-EEEE ").format(Calendar.getInstance().getTime());
 	}

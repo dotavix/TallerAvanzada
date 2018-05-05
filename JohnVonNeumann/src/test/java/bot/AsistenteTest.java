@@ -111,10 +111,22 @@ public class AsistenteTest {
 		Assert.assertTrue(robot.enviar(USER,"que dia sera mañana?????").contains("Sera el"));
 		
 		System.out.println(robot.enviar(USER,"cuántos días pasaron desde el 1 de abril de 2017?"));
-		Assert.assertTrue(robot.enviar(USER,"cuántos días pasaron desde el 1 de abril de 2017?").contains("Pasaron"));
+		Assert.assertTrue(robot.enviar(USER,"cuántos días pasaron desde el 1 de abril de 2017?").contains("Paso"));
 		
 		System.out.println(robot.enviar(USER,"cuantos dias faltan para el 4 de septiembre de 2018??"));
-		Assert.assertTrue(robot.enviar(USER,"cuantos dias faltan para el 4 de septiembre de 2018??").contains("Faltan"));
+		Assert.assertTrue(robot.enviar(USER,"cuantos dias faltan para el 4 de septiembre de 2018??").contains("Falta"));
+		
+		System.out.println(robot.enviar(USER,"cuántos meses pasaron desde el 1 de abril de 2017?"));
+		Assert.assertTrue(robot.enviar(USER,"cuántos meses pasaron desde el 1 de abril de 2017?").contains("Paso"));
+		
+		System.out.println(robot.enviar(USER,"cuantos meses faltan para el 4 de septiembre de 2018??"));
+		Assert.assertTrue(robot.enviar(USER,"cuantos meses faltan para el 4 de septiembre de 2018??").contains("Falta"));
+		
+		System.out.println(robot.enviar(USER,"cuántos años pasaron desde el 1 de abril de 2017?"));
+		Assert.assertTrue(robot.enviar(USER,"cuántos años pasaron desde el 1 de abril de 2017?").contains("Paso"));
+		
+		System.out.println(robot.enviar(USER,"cuantos años faltan para el 4 de septiembre de 2023??"));
+		Assert.assertTrue(robot.enviar(USER,"cuantos años faltan para el 4 de septiembre de 2023??").contains("Falta"));
 		
 //		"cuantos dias faltan para el 8 de agosto??"
 		
