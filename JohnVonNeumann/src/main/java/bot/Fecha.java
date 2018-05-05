@@ -1,4 +1,4 @@
-package fecha;
+package bot;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -36,7 +36,7 @@ public class Fecha {
 
 	public static String diasTranscurridos(Date fechaInicial, Date fechaFinal) {
 		int dias = (int) (Math.abs((fechaFinal.getTime() - fechaInicial.getTime())) / 86400000);
-		return ""+dias+" dias.";
+		return dias>1 ? ""+dias+" dias." : ""+dias+" dia.";
 	}
 	
 	public static String fechaHoy() {

@@ -4,8 +4,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import fecha.Fecha;
-
 public class Asistente {
 	
 	String nombreAsistente;
