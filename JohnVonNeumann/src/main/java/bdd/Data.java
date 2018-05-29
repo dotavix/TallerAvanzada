@@ -1,11 +1,20 @@
 package bdd;
 
+import java.io.Serializable;
+
 import javax.persistence.*;
 
 @Entity
 @Table (name = "data")
-public class Data {
+public class Data implements Serializable{
 	
+	private static final long serialVersionUID = 1L;
+
+	@Override
+	public String toString() {
+		return "Data [user=" + user + ", ciudad=" + ciudad + ", edad=" + edad + ", chuck=" + chuck + "]";
+	}
+
 	@Id
 	@Column(name = "user")
 	private String user;
@@ -15,11 +24,16 @@ public class Data {
 	
 	@Column(name = "edad")
 	private String edad;
+	
+	@Column(name = "chuck")
+	private Integer chuck;
 
-	public Data(String user, String ciudad, String edad) {
-		this.user = user;
-		this.ciudad = ciudad;
-		this.edad = edad;
+	public Integer getChuck() {
+		return chuck;
+	}
+
+	public void setChuck(Integer chuck) {
+		this.chuck = chuck;
 	}
 
 	public Data() {
@@ -50,16 +64,21 @@ public class Data {
 		this.edad = edad;
 	}
 	
-	public void save(){
-        Conector con = new Conector();
-        con.connect();
-        con.saveData(this);
-        con.close();
-    }
-	
+//	public void save(){
+//        Conector con = new Conector();
+//        con.connect();
+//        con.saveData(this);
+//        con.close();
+//    }
+//	
 	public static void main(String[] args) {
-		Data data = new Data("raul","san isidro","45");
-		data.save();
+//		Data data = new Data("raul","san isidro","45");
+//		data.save();
+		
+//		Data d = new Data("test1","merle","23");
+//		HibernateApp.saveData(d);
+//		
+//		System.out.println(HibernateApp.obtainData("test1").toString());
 	}
 	
 }
