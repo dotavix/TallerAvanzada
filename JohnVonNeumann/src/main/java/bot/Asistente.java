@@ -35,6 +35,21 @@ public class Asistente {
 			if(entrada.matches(".*chau.*")) {
 				return EcoResponse.devolverDespedida(user);
 			}
+			if(entrada.matches(".*chuck.*fact.*")) {
+				return "@"+user+" "+ChuckNorrisFacts.mostrar(user);
+			}
+			if(entrada.matches(".*(primera|1ra).*ley.*robotica.*")) {
+				return "@"+user+" "+LeyesRobotica.PrimeraLey();
+			}
+			if(entrada.matches(".*(segunda|2da).*ley.*robotica.*")) {
+				return "@"+user+" "+LeyesRobotica.SegundaLey();
+			}
+			if(entrada.matches(".*(tercera|3ra).*ley.*robotica.*")) {
+				return "@"+user+" "+LeyesRobotica.TerceraLey();
+			}
+			if(entrada.matches(".*(toda).*ley.*robotica.*")) {
+				return "@"+user+" "+LeyesRobotica.LeyAll();
+			}
 			if(entrada.matches(".*clima en.*")) {
 				return "@"+user+" "+Weather.temperatura(entrada.split("clima en ")[1].split(",")[0]);
 			}

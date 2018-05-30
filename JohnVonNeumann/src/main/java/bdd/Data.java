@@ -9,12 +9,7 @@ import javax.persistence.*;
 public class Data implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
-
-	@Override
-	public String toString() {
-		return "Data [user=" + user + ", ciudad=" + ciudad + ", edad=" + edad + ", chuck=" + chuck + "]";
-	}
-
+	
 	@Id
 	@Column(name = "user")
 	private String user;
@@ -26,18 +21,13 @@ public class Data implements Serializable{
 	private String edad;
 	
 	@Column(name = "chuck")
-	private Integer chuck;
-
-	public Integer getChuck() {
-		return chuck;
-	}
-
-	public void setChuck(Integer chuck) {
-		this.chuck = chuck;
-	}
+	private Integer chuck = 0;
 
 	public Data() {
-		// TODO Auto-generated constructor stub
+	}
+
+	public Data(String user) {
+		this.user = user;
 	}
 
 	public String getUser() {
@@ -64,21 +54,34 @@ public class Data implements Serializable{
 		this.edad = edad;
 	}
 	
-//	public void save(){
-//        Conector con = new Conector();
-//        con.connect();
-//        con.saveData(this);
-//        con.close();
-//    }
-//	
-	public static void main(String[] args) {
-//		Data data = new Data("raul","san isidro","45");
-//		data.save();
-		
-//		Data d = new Data("test1","merle","23");
-//		HibernateApp.saveData(d);
-//		
-//		System.out.println(HibernateApp.obtainData("test1").toString());
+	public Integer getChuck() {
+		return chuck;
+	}
+
+	public void setChuck(Integer chuck) {
+		this.chuck = chuck;
+	}
+	
+	public void save(){
+        HibernateApp ha = new HibernateApp();
+        ha.connect();
+        ha.saveData(this);
+        ha.close();
+    }
+	
+	public void obtain(){
+        HibernateApp ha = new HibernateApp();
+        ha.connect();
+        Data d = ha.obtainData(this.user);
+        this.ciudad = d.ciudad;
+        this.edad = d.edad;
+        this.chuck = d.chuck;
+        ha.close();
+    }
+	
+	@Override
+	public String toString() {
+		return "Data [user=" + user + ", ciudad=" + ciudad + ", edad=" + edad + ", chuck=" + chuck + "]";
 	}
 	
 }

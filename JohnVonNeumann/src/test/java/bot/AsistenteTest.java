@@ -144,5 +144,36 @@ public class AsistenteTest {
 				
 	}
 	
+	@Test
+	public void ejercicioChuck() {
+		
+		System.out.println(robot.enviar(USER,"quiero un chuck norris fact"));
+		Assert.assertTrue(robot.enviar(USER,"quiero un chuck norris fact").contains("Chuck Norris"));
+		
+		System.out.println(robot.enviar(USER,"quiero un chuck norris fact"));
+		Assert.assertTrue(robot.enviar(USER,"quiero un chuck norris fact").contains("Chuck Norris"));
+		
+		System.out.println(robot.enviar(USER,"quiero un chuck norris fact"));
+		Assert.assertTrue(robot.enviar(USER,"quiero un chuck norris fact").contains("Chuck Norris"));
+				
+	}
+	
+	@Test
+	public void ejercicioRobotica() {
+		
+		System.out.println(robot.enviar(USER,"quiero la primera ley de la robotica please"));
+		Assert.assertTrue(robot.enviar(USER,"quiero la primera ley de la robotica please").contains("1- Un robot"));
+		
+		System.out.println(robot.enviar(USER,"quiero la 2da ley de la robotica please"));
+		Assert.assertTrue(robot.enviar(USER,"quiero la 2da ley de la robotica please").contains("2- Un robot"));
+		
+		System.out.println(robot.enviar(USER,"quiero la tercera ley de la robotica please"));
+		Assert.assertTrue(robot.enviar(USER,"quiero la tercera ley de la robotica please").contains("3- Un robot"));
+		
+		System.out.println(robot.enviar(USER,"quiero todas las leyes de la robotica please"));
+		Assert.assertTrue(robot.enviar(USER,"quiero todas las leyes de la robotica please").contains("1- Un robot"));
+				
+	}
+	
 	
 }
