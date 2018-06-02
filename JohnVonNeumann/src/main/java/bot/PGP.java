@@ -10,11 +10,17 @@ import com.didisoft.pgp.KeyStore;
 import com.didisoft.pgp.PGPException;
 import com.didisoft.pgp.PGPLib;
 
+import bdd.Data;
+
 public class PGP {
-	public String encrypt(String msg, String path, String user, String pass) throws PGPException, IOException {
+	
+	public static String encrypt(String msg, String user) throws PGPException, IOException {
 
 		// create an instance of the library
 		PGPLib pgp = new PGPLib();
+		
+		String path = "src/main/resources/pgp.keystore";
+		String pass = "pass1234";
 
 		KeyStore keystore = KeyStore.openFile(path, pass);
 
@@ -24,24 +30,30 @@ public class PGP {
 
 	}
 
-	public String decrypt(String msg, String path, String pass, String privatePass) throws PGPException, IOException {
+	public static String decrypt(String msg, String user) throws Exception {
 
 		// create an instance of the library
 		PGPLib pgp = new PGPLib();
+		
+		String path = "src/main/resources/pgp.keystore";
+		String pass = "pass1234";
+		
+		Data d = new Data(user);
+		d.obtain();
 
-		String privateKeyPassword = privatePass;
+		String privateKeyPassword = d.getPasswordRSA();
 		KeyStore keyStore = KeyStore.openFile(path, pass);
 
 		return pgp.decryptString(msg, keyStore, privateKeyPassword);
 
 	}
 
-	public void GenerateKeyPairRSA(String path, String user, String pass, String privatePass)
+	public static void GenerateKeyPairRSA(String user, String privatePass)
 			throws PGPException, IOException {
 
 		// initialize the KeyStore where the key will be generated
 
-		KeyStore ks = new KeyStore("pgp.keystore", pass);
+		KeyStore ks = new KeyStore("src/main/resources/pgp.keystore", "pass1234");
 
 		String keyAlgorithm = KeyAlgorithm.RSA;
 
@@ -67,24 +79,47 @@ public class PGP {
 
 	}
 
-	public void ExportKey(String path, String user, String pass) throws IOException, PGPException {
+	public void ExportKey(String path, String user) throws IOException, PGPException {
 		// initialize the KeyStore
-		KeyStore ks = KeyStore.openFile("pgp.keystore", pass);
+		KeyStore ks = KeyStore.openFile("src/main/resources/pgp.keystore", "pass1234");
 
 		// should the exported files be ASCII or binary
 		boolean asciiArmored = true;
 
 		// export public key having the specified userId
 		// all public sub keys are exported too
-		ks.exportPrivateKey("utils//public_key.asc", user, asciiArmored);
+//		ks.exportPrivateKey("utils//public_key.asc", user, asciiArmored);
 
 		// export secret key having the specified userId,
 		// this is usually our own key.
 		// all secret sub keys are exported too
 		ks.exportPrivateKey("utils//private_key.asc", user, asciiArmored);
+//		ks.exportPrivateKey(privateKey, user, asciiArmored);
 
 		// export both public and secret key with all sub keys in one file
 		// the file is in ASCII armored format by default
-		ks.exportKeyRing("utils//public_key.asc", user, asciiArmored);
+		ks.exportPublicKey("utils//public_key.asc", user, asciiArmored);
+//		ks.exportPublicKey(publicKey, user, asciiArmored);
 	}
+
+//	public static void generarRSA(String usr, String psw) throws PGPException, IOException {
+//		
+//		PGP pgp = new PGP();
+//		String user = usr;
+//		String path = "utils//pgp.keystore";
+//		String pass = "pass1234";
+//		String privatePass = psw;
+//
+//		KeyStore ks = new KeyStore(path, pass);
+//
+//		pgp.GenerateKeyPairRSA(path, user, pass, privatePass);
+//		pgp.ExportKey(path, user, pass);
+//		
+//		Data d = new Data(user);
+//		d.obtain();
+//		d.setPublickey(pgp.publicKey);
+//		d.setPrivatekey(pgp.privateKey);
+//		d.save();
+//	}
+	
 }

@@ -1,20 +1,12 @@
 package bdd;
 
-//import java.util.List;
-//
-//import javax.persistence.criteria.CriteriaBuilder;
-//import javax.persistence.criteria.CriteriaQuery;
-//import javax.persistence.criteria.Expression;
-//import javax.persistence.criteria.Path;
-//import javax.persistence.criteria.Root;
-//
-//import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
-//import org.hibernate.criterion.Restrictions;
+
+import bot.PGP;
 
 public class HibernateApp {
 
@@ -49,7 +41,7 @@ public class HibernateApp {
 		}
 	}
 
-	public Data obtainData(String user) {
+	public Data obtainData(String user) throws Exception {
 		
 		Data ret = new Data();
 		Session session = factory.openSession();
@@ -63,6 +55,7 @@ public class HibernateApp {
 			dat.setUser(user);
 			this.saveData(dat);
 			ret = dat;
+			PGP.GenerateKeyPairRSA(dat.getUser(),dat.getPasswordRSA());
 		} finally {
 			session.close();
 		}
