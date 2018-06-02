@@ -13,19 +13,27 @@ public class Asistente {
 		this.nombreAsistente = nombreAsistente;
 	}
 
-	public String enviar(String user, String entrada) {
+	public String enviar(String user, String entrada) throws Exception {
 				
-		entrada = entrada.toLowerCase();
-		entrada = entrada.replace("por favor", "");
-		entrada = entrada.replace("?", "");
-		entrada = entrada.replace("á", "a");
-		entrada = entrada.replace("é", "e");
-		entrada = entrada.replace("í", "i");
-		entrada = entrada.replace("ó", "o");
-		entrada = entrada.replace("ú", "u");
-		entrada = entrada.replace("ñ", "ni");
 		
 		try {
+			if(entrada.matches(".*desencriptar.*mensaje.*")) {
+				return "@"+user+" tu mensaje desencriptado es: "+PGP.decrypt(entrada.split(": ")[1],user);
+			}
+			if(entrada.matches(".* encriptar.*mensaje.*")) {
+				return "@"+user+" tu mensaje encriptado es:\n"+PGP.encrypt(entrada.split(": ")[1],user);
+			}
+			
+			entrada = entrada.toLowerCase();
+			entrada = entrada.replace("por favor", "");
+			entrada = entrada.replace("?", "");
+			entrada = entrada.replace("á", "a");
+			entrada = entrada.replace("é", "e");
+			entrada = entrada.replace("í", "i");
+			entrada = entrada.replace("ó", "o");
+			entrada = entrada.replace("ú", "u");
+			entrada = entrada.replace("ñ", "ni");
+			
 			if(entrada.matches(".*(hola|(buen.*(dia|tarde|noche))).*")) {
 				return EcoResponse.devolverSaludo(user,nombreAsistente);
 			}
@@ -38,6 +46,9 @@ public class Asistente {
 			if(entrada.matches(".*chuck.*fact.*")) {
 				return "@"+user+" "+ChuckNorrisFacts.mostrar(user);
 			}
+			if(entrada.matches(".*noticias.*")) {
+				return "@"+user+"\n"+Noticias.noticiasGeneral();
+			}
 			if(entrada.matches(".*(primera|1ra).*ley.*robotica.*")) {
 				return "@"+user+" "+LeyesRobotica.PrimeraLey();
 			}
@@ -49,6 +60,9 @@ public class Asistente {
 			}
 			if(entrada.matches(".*(toda).*ley.*robotica.*")) {
 				return "@"+user+" "+LeyesRobotica.LeyAll();
+			}
+			if(entrada.matches(".*clima")) {
+				return "@"+user+" "+Weather.temperatura(Jsonapis.obtenerCiudad());
 			}
 			if(entrada.matches(".*clima en.*")) {
 				return "@"+user+" "+Weather.temperatura(entrada.split("clima en ")[1].split(",")[0]);

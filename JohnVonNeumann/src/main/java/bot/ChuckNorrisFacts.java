@@ -6,7 +6,7 @@ import bdd.Data;
 
 public class ChuckNorrisFacts {
 
-	public static String mostrar(String user) {
+	public static String mostrar(String user) throws Exception {
 		
 		ArrayList<String> lista = new ArrayList<String>();
 		lista.add("Chuck Norris threw a grenade and killed 50 people, then it exploded.");

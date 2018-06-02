@@ -1,8 +1,13 @@
 package bdd;
 
+import java.io.IOException;
 import java.io.Serializable;
 
 import javax.persistence.*;
+
+import com.didisoft.pgp.PGPException;
+
+import bot.PGP;
 
 @Entity
 @Table (name = "data")
@@ -22,12 +27,16 @@ public class Data implements Serializable{
 	
 	@Column(name = "chuck")
 	private Integer chuck = 0;
+	
+	@Column(name = "passwordRSA")
+	private String passwordRSA = "1234";
 
 	public Data() {
 	}
 
-	public Data(String user) {
+	public Data(String user) throws PGPException, IOException {
 		this.user = user;
+		PGP.GenerateKeyPairRSA(this.user,this.passwordRSA);
 	}
 
 	public String getUser() {
@@ -62,6 +71,15 @@ public class Data implements Serializable{
 		this.chuck = chuck;
 	}
 	
+	public String getPasswordRSA() {
+		return passwordRSA;
+	}
+
+	public void setPassword(String password) throws Exception {
+		this.passwordRSA = password;
+		PGP.GenerateKeyPairRSA(this.user,this.passwordRSA);
+	}
+
 	public void save(){
         HibernateApp ha = new HibernateApp();
         ha.connect();
@@ -69,19 +87,21 @@ public class Data implements Serializable{
         ha.close();
     }
 	
-	public void obtain(){
+	public void obtain() throws Exception{
         HibernateApp ha = new HibernateApp();
         ha.connect();
         Data d = ha.obtainData(this.user);
         this.ciudad = d.ciudad;
         this.edad = d.edad;
         this.chuck = d.chuck;
+        this.passwordRSA = d.passwordRSA;
         ha.close();
     }
-	
+
 	@Override
 	public String toString() {
-		return "Data [user=" + user + ", ciudad=" + ciudad + ", edad=" + edad + ", chuck=" + chuck + "]";
+		return "Data [user=" + user + ", ciudad=" + ciudad + ", edad=" + edad + ", chuck=" + chuck + ", passwordRSA="
+				+ passwordRSA + "]";
 	}
 	
 }
