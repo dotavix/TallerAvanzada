@@ -29,10 +29,11 @@ public class Conector {
 
 	public void saveData(Data data) {
 		try {
-			PreparedStatement st = connect.prepareStatement("insert into data (user, ciudad, edad) values (?,?,?)");
+			PreparedStatement st = connect.prepareStatement("insert into data (user, password ,ciudad, edad) values (?,?,?,?)");
 			st.setString(1, data.getUser());
-			st.setString(2, data.getCiudad());
-			st.setString(3, data.getEdad());
+			st.setString(2, data.getPassword());
+			st.setString(3, data.getCiudad());
+			st.setString(4, data.getEdad());
 			st.execute();
 		} catch (SQLException ex) {
 			System.err.println(ex.getMessage());
@@ -62,10 +63,28 @@ public class Conector {
 		}
 	}
 
-	public static void main(String[] args) {
+	public boolean mostrarUsuario(String user) {
+
+		ResultSet result = null;
+		try {
+			PreparedStatement st = connect.prepareStatement("select * from data where user = '" + user + "'");
+			result = st.executeQuery();
+			while (result.next()) {
+				return true;
+			}
+
+		} catch (SQLException ex) {
+			System.err.println(ex.getMessage());
+		}
+		return false;
+	}
+	
+	
+	public static void main(String[] args) throws Exception {
 		Conector con = new Conector();
 		con.connect();
-		con.mostrarData();
+
+		
 		con.close();
 	}
 }
