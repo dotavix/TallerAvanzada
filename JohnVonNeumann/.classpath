@@ -28,5 +28,11 @@
 	<classpathentry kind="lib" path="src/main/resources/jta.jar"/>
 	<classpathentry kind="lib" path="src/main/resources/slf4j-api-1.7.7.jar"/>
 	<classpathentry kind="lib" path="src/main/resources/slf4j-simple-1.7.7.jar"/>
+	<classpathentry kind="lib" path="src/main/resources/9Search.jar"/>
+	<classpathentry kind="lib" path="src/main/resources/giphy4j-1.0.1.jar"/>
+	<classpathentry kind="lib" path="src/main/resources/giphy4j-1.0.1-javadoc.jar"/>
+	<classpathentry kind="lib" path="src/main/resources/giphy4j-1.0.1-sources.jar"/>
+	<classpathentry kind="lib" path="src/main/resources/gson-1.6.jar"/>
+	<classpathentry kind="lib" path="src/main/resources/commons-io-2.4.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -130,6 +130,12 @@ public class Asistente {
 				DateFormat format = new SimpleDateFormat("dd 'de' MMMM 'de' yyyy");
 				return "@"+user+" "+"Falta "+Fecha.aniosTranscurridos(format.parse(input),new Date());
 			}
+			if(entrada.matches(".*quiero un (gif|GIF) de.*")) {
+				String input = entrada.split("quiero un gif de ")[1];
+				String url = GiphySearch.buscarGIF(input);
+				GiphySearch.mostrarGif(url);
+				return url;
+			}
 		}
 		catch (Exception e) {
 //			e.printStackTrace();
