@@ -3,10 +3,11 @@ package frame;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-import java.awt.BorderLayout;
+
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -61,7 +62,7 @@ public class Login{
 		frmChatbot.getContentPane().add(usuarioTxtField);
 		usuarioTxtField.setColumns(10);
 		
-		passTxtField = new JTextField();
+		passTxtField = new JPasswordField();
 		passTxtField.setBounds(140, 94, 170, 22);
 		frmChatbot.getContentPane().add(passTxtField);
 		passTxtField.setColumns(10);
@@ -84,11 +85,16 @@ public class Login{
 			String pass = passTxtField.getText();
 			Conector con = new Conector();
 			con.connect();
+			if(usuarioTxtField.getText().isEmpty() || passTxtField.getText().isEmpty() )
+				JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "ERROR - Empty fields",
+						JOptionPane.ERROR_MESSAGE);
+			else {
 				if(con.mostrarUsuario(usr))
 					System.out.println("Adentro");
 				else {
 					JOptionPane.showMessageDialog(null, "Mira capo, me parece que no te conece nadie. Registrate y no me hagas perder mas el tiempo en esta consulta. Saludos y cuidate pa.", "Usuario inexistente", JOptionPane.ERROR_MESSAGE);
 				}
+			}
 				con.close();
 			}
 			
@@ -102,8 +108,8 @@ public class Login{
 			public void actionPerformed(ActionEvent arg0) {
 				
 				Registrarse reg = new Registrarse();
-				reg.invocarRegistro();
-				frmChatbot.setVisible(false);
+				reg.frmRegistro.setVisible(true);
+				frmChatbot.dispose();
 				
 				
 				

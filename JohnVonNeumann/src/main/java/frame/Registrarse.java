@@ -10,14 +10,15 @@ import bdd.Data;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 
-public class Registrarse extends Login {
+public class Registrarse {
 
-	private JFrame frmRegistro;
+			JFrame frmRegistro;
 	private JTextField usrTextField;
 	private JTextField edadTextField;
 	private JTextField ciudadTextField;
@@ -27,7 +28,7 @@ public class Registrarse extends Login {
 	/**
 	 * Launch the application.
 	 */
-	public void invocarRegistro() {
+	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -72,12 +73,12 @@ public class Registrarse extends Login {
 		frmRegistro.getContentPane().add(ciudadTextField);
 		ciudadTextField.setColumns(10);
 
-		passTextField = new JTextField();
+		passTextField = new JPasswordField();
 		passTextField.setBounds(144, 118, 176, 22);
 		frmRegistro.getContentPane().add(passTextField);
 		passTextField.setColumns(10);
 
-		repassTextField = new JTextField();
+		repassTextField = new JPasswordField();
 		repassTextField.setBounds(144, 153, 176, 22);
 		frmRegistro.getContentPane().add(repassTextField);
 		repassTextField.setColumns(10);
@@ -121,12 +122,11 @@ public class Registrarse extends Login {
 				Conector con = new Conector();
 				con.connect();
 
-				/*if (usr.equals(null) || pass.equals(null) || repass.equals(null) || edad.equals(null)
-						|| ciudad.equals(null))
+				if (usrTextField.getText().isEmpty() || passTextField.getText().isEmpty() || repassTextField.getText().isEmpty() || edadTextField.getText().isEmpty() || ciudadTextField.getText().isEmpty())
 					JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "ERROR - Empty fields",
 							JOptionPane.ERROR_MESSAGE);
-				*/
-			
+
+				else {
 					if (con.mostrarUsuario(usr)) {
 						JOptionPane.showMessageDialog(null, " El usuario ya esta en uso", "ERROR - Usuario existente",
 								JOptionPane.ERROR_MESSAGE);
@@ -145,7 +145,7 @@ public class Registrarse extends Login {
 									JOptionPane.ERROR_MESSAGE);
 						}
 					}
-				
+				}
 				con.close();
 
 			}
@@ -157,8 +157,11 @@ public class Registrarse extends Login {
 		volverBtn.setFont(new Font("Consolas", Font.PLAIN, 15));
 		volverBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				frmRegistro.setVisible(false);
-				frmChatbot.setVisible(true);
+				
+				Login frmLogin = new Login();
+				frmLogin.frmChatbot.setVisible(true);
+				frmRegistro.dispose();
+				
 
 			}
 		});
