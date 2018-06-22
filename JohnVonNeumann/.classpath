@@ -34,5 +34,6 @@
 	<classpathentry kind="lib" path="src/main/resources/giphy4j-1.0.1-sources.jar"/>
 	<classpathentry kind="lib" path="src/main/resources/gson-1.6.jar"/>
 	<classpathentry kind="lib" path="src/main/resources/commons-io-2.4.jar"/>
+	<classpathentry kind="lib" path="src/main/resources/jsoup-1.11.3.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
