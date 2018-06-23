@@ -80,6 +80,23 @@ public class Conector {
 	}
 	
 	
+	public boolean mostrarPassword(String pass) {
+
+		ResultSet result = null;
+		try {
+			PreparedStatement st = connect.prepareStatement("select * from data where password = '" + pass + "'");
+			result = st.executeQuery();
+			while (result.next()) {
+				return true;
+			}
+
+		} catch (SQLException ex) {
+			System.err.println(ex.getMessage());
+		}
+		return false;
+	}
+	
+	
 	public static void main(String[] args) throws Exception {
 		Conector con = new Conector();
 		con.connect();

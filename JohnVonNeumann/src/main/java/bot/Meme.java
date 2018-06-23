@@ -76,7 +76,7 @@ public class Meme {
 	public static void main(String[] args) {
 
 		Meme memencio = new Meme();
-		memencio.mostrarMeme("porque eres asi");
+		memencio.mostrarMeme("ste men");
 
 	}
 
