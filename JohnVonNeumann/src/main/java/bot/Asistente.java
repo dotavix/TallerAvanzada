@@ -141,6 +141,11 @@ public class Asistente {
 				NineGAG.buscarGAG();
 				return "@"+user+" "+"Disfruta este tremendo GAG padre"; 
 			}
+			if(entrada.matches(".*quiero un meme de.*")) {
+				String input = entrada.split("quiero un meme de ")[1];
+				Meme.mostrarMeme(input);
+				return "@"+user+" "+"Que buen momazo";
+			}
 		}
 		catch (Exception e) {
 //			e.printStackTrace();
@@ -150,5 +155,13 @@ public class Asistente {
 		return "No entendi lo que me dijiste @"+user+", podrias repetirlo?";
 	}
 
+	public String getNombreAsistente() {
+		return nombreAsistente;
+	}
+
+	public void setNombreAsistente(String nombreAsistente) {
+		this.nombreAsistente = nombreAsistente;
+	}
+	
 
 }
