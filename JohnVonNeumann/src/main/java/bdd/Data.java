@@ -49,8 +49,6 @@ public class Data implements Serializable {
 	public void setUser(String user) {
 		this.user = user;
 	}
-	
-	
 
 	public String getPassword() {
 		return password;
@@ -95,26 +93,23 @@ public class Data implements Serializable {
 
 	public void save() {
 		HibernateApp ha = new HibernateApp();
-		ha.connect();
 		ha.saveData(this);
-		ha.close();
 	}
 
 	public void obtain() throws Exception {
 		HibernateApp ha = new HibernateApp();
-		ha.connect();
 		Data d = ha.obtainData(this.user);
+		this.password = d.password;
 		this.ciudad = d.ciudad;
 		this.edad = d.edad;
 		this.chuck = d.chuck;
 		this.passwordRSA = d.passwordRSA;
-		ha.close();
 	}
 
 	@Override
 	public String toString() {
-		return "Data [user=" + user + ", ciudad=" + ciudad + ", edad=" + edad + ", chuck=" + chuck + ", passwordRSA="
-				+ passwordRSA + "]";
+		return "Data [user=" + user + ", password=" + password + ", ciudad=" + ciudad + ", edad=" + edad + ", chuck="
+				+ chuck + ", passwordRSA=" + passwordRSA + "]";
 	}
 
 }
