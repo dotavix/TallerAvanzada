@@ -10,25 +10,37 @@ import bot.PGP;
 
 public class HibernateApp {
 
-	private Configuration cfg;
-	private SessionFactory factory;
-	
-	public void connect() {
-		cfg = new Configuration().configure("hibernate.cfg.xml");
-		factory = cfg.buildSessionFactory();
+	private static final SessionFactory factory;
+
+	static {
+		try {
+			factory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+		} catch (HibernateException he) {
+			System.err.println("Ocurrió un error en la inicialización de la SessionFactory: " + he);
+			throw new ExceptionInInitializerError(he);
+		}
 	}
-	
-	public void close() {
-		factory.close();
+
+	public static SessionFactory getSessionFactory() {
+		return factory;
 	}
-	
+
+	// public void connect() {
+	// cfg = new Configuration().configure("hibernate.cfg.xml");
+	// factory = cfg.buildSessionFactory();
+	// }
+	//
+	// public void close() {
+	// factory.close();
+	// }
+
 	public void saveData(Data d) {
 
 		Session session = factory.openSession();
 		Data data = d;
 
 		Transaction tx = session.beginTransaction();
-		
+
 		try {
 			session.saveOrUpdate(data);
 			tx.commit();
@@ -42,25 +54,24 @@ public class HibernateApp {
 	}
 
 	public Data obtainData(String user) throws Exception {
-		
+
 		Data ret = new Data();
 		Session session = factory.openSession();
-		
+
 		try {
-			String cq = "from Data where user = '"+user+"'";
-			ret = (Data)session.createQuery(cq).getSingleResult();
+			ret = (Data) session.get(Data.class, user);
 		} catch (Exception e) {
 			e.printStackTrace();
 			Data dat = new Data();
 			dat.setUser(user);
 			this.saveData(dat);
 			ret = dat;
-			PGP.GenerateKeyPairRSA(dat.getUser(),dat.getPasswordRSA());
+			PGP.GenerateKeyPairRSA(dat.getUser(), dat.getPasswordRSA());
 		} finally {
 			session.close();
 		}
-		
+
 		return ret;
 	}
-	
+
 }
