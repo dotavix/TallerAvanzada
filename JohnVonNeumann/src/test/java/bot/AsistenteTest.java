@@ -193,5 +193,5 @@ public class AsistenteTest {
 				.contains("---NOTICIAS---"));
 
 	}
-
+	
 }

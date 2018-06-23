@@ -134,7 +134,12 @@ public class Asistente {
 				String input = entrada.split("quiero un gif de ")[1];
 				String url = GiphySearch.buscarGIF(input);
 				GiphySearch.mostrarGif(url);
-				return url;
+				return "@"+user+" " +"Disfruta este tremendo gif padre"; 
+				
+			}
+			if(entrada.matches(".*quiero un (gag|GAG).*")){
+				NineGAG.buscarGAG();
+				return "@"+user+" "+"Disfruta este tremendo GAG padre"; 
 			}
 		}
 		catch (Exception e) {
